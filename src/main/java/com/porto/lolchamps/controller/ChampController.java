@@ -1,5 +1,7 @@
 package com.porto.lolchamps.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -30,8 +33,10 @@ public class ChampController {
     private ChampService champService;
 
     @GetMapping
-    public ResponseEntity<Page<DadosListagemChamp>> listarChamps(Pageable paginacao){
-        var champs = champService.listarChamps(paginacao);
+    public ResponseEntity<Page<DadosListagemChamp>> listarChamps(Pageable paginacao,
+                                                                @RequestParam(required = false) String name,
+                                                                @RequestParam(required = false) List<Long> roles){
+        var champs = champService.listarChamps(paginacao, name, roles);
 
         return ResponseEntity.ok(champs);
     }

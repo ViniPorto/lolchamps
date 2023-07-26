@@ -1,5 +1,7 @@
 package com.porto.lolchamps.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,8 +26,15 @@ public class ChampService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public Page<DadosListagemChamp> listarChamps(Pageable paginacao) {
-        return champRepository.findAllByAtivoTrue(paginacao).map(DadosListagemChamp::new);
+    public Page<DadosListagemChamp> listarChamps(Pageable paginacao, String name, List<Long> roles) {
+        if(name == null && roles == null){
+            return champRepository.findAllByAtivoTrue(paginacao).map(DadosListagemChamp::new);
+        }else if(name != null && roles == null){
+            return champRepository.findAllFiltroPorName(paginacao, name).map(DadosListagemChamp::new);
+        }else if(name == null && roles != null){
+            return champRepository.findAllFiltroPorRole(paginacao, roles).map(DadosListagemChamp::new);
+        }
+        return champRepository.findAllFiltroPorRoleEName(paginacao, name, roles).map(DadosListagemChamp::new);
     }
 
     public Champ detalharChamp(Long id) {
