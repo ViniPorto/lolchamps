@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.porto.lolchamps.domain.user.DadosAutenticacao;
+import com.porto.lolchamps.domain.user.Usuario;
+import com.porto.lolchamps.infra.exception.security.DadosTokenJWT;
+import com.porto.lolchamps.service.TokenService;
 
 import jakarta.validation.Valid;
 
@@ -20,12 +23,16 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
-    @PostMapping
-    public ResponseEntity<Void> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
-        var token = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
-        var authentication = manager.authenticate(token);
+    @Autowired
+    private TokenService tokenService; 
 
-        return ResponseEntity.ok().build();
+    @PostMapping
+    public ResponseEntity<DadosTokenJWT> efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
+        var authenticationToken = new UsernamePasswordAuthenticationToken(dados.login(), dados.senha());
+        var authentication = manager.authenticate(authenticationToken);
+
+        var tokenJWT = tokenService.gerarToken((Usuario)authentication.getPrincipal());
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 
 
