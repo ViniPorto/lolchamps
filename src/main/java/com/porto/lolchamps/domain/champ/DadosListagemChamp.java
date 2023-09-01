@@ -12,10 +12,11 @@ public record DadosListagemChamp(
     Integer eaPrice,
     LocalDate releaseDate,
     Boolean sale,
-    String image
+    String image,
+    Integer percent
 ) {
     public DadosListagemChamp(Champ champ){
-        this(champ.getId(), champ.getName(), new DadosListagemRole(champ.getRole()), champ.getRpPrice(), champ.getEaPrice(), champ.getReleaseDate(), champ.getSale(), champ.getImage());
+        this(champ.getId(), champ.getName(), new DadosListagemRole(champ.getRole()), champ.getRpPrice(), champ.getEaPrice(), champ.getReleaseDate(), champ.getSale(), champ.getImage(), champ.getPercent());
     }
 
 }

@@ -45,6 +45,7 @@ public class Champ {
     private Boolean sale;
     private String image;
     private Boolean ativo;
+    private Integer percent;
 
     public Champ(DadosCadastroChamp dadosCadastroChamp, Role role){
         this.name = dadosCadastroChamp.name();
@@ -55,6 +56,7 @@ public class Champ {
         this.sale = dadosCadastroChamp.sale();
         this.image = dadosCadastroChamp.image();
         this.ativo = true;
+        this.percent = dadosCadastroChamp.percent();
     }
 
     public void atualizarInformacoes(@Valid DadosEdicaoChamp dadosEdicaoChamp) {
@@ -69,6 +71,9 @@ public class Champ {
         }
         if(dadosEdicaoChamp.image() != null){
             this.image = dadosEdicaoChamp.image();
+        }
+        if(dadosEdicaoChamp.percent() != null){
+            this.percent = dadosEdicaoChamp.percent();
         }
     }
 
