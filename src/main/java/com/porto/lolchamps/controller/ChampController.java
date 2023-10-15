@@ -37,7 +37,7 @@ public class ChampController {
                                                                 @RequestParam(required = false) String name,
                                                                 @RequestParam(required = false) List<Long> roles){
         var champs = champService.listarChamps(paginacao, name, roles);
-
+        System.out.println("teste");
         return ResponseEntity.ok(champs);
     }
 

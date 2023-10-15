@@ -28,6 +28,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(httpRequest -> httpRequest.requestMatchers(HttpMethod.POST, "/login").permitAll())
                 .authorizeHttpRequests(httpRequest -> httpRequest.requestMatchers(HttpMethod.GET, "/champ").permitAll())
                 .authorizeHttpRequests(httpRequest -> httpRequest.anyRequest().authenticated())
+                .cors(corsCustomizer -> corsCustomizer.disable())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

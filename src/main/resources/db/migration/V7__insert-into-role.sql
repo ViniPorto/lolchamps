@@ -1,0 +1,1 @@
+INSERT INTO `role` VALUES (1,'tank',1),(2,'support',1),(3,'mage',1),(4,'assassin',1),(5,'adc',1),(6,'fighter',1);
