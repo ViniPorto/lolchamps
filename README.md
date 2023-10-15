@@ -75,8 +75,14 @@ A API tem os valores de usuario e senha do banco respectivamente "root" e "12345
 # Clone este repositório
 $ git clone git@github.com:ViniPorto/lolchamps.git
 
-# Acesse a pasta do projeto que contém o build da aplicação no terminal/cmd
-$ cd lolchamps/target
+# Acesse a pasta do projeto no terminal/cmd
+$ cd lolchamps
+
+# Crie o build da API:
+$ mvn clean package
+
+# Acesse a pasta criada:
+$ cd target
 
 # Execute o arquivo através do comando:
 $ java -jar lolchamps-0.0.1-SNAPSHOT.jar
