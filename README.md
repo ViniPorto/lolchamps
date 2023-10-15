@@ -66,7 +66,7 @@ Projeto referenciado no [repositório do clone do client do League Of Legends](h
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 [Git](https://git-scm.com), [JDK 17](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html), [Maven](https://maven.apache.org/download.cgi), [MySQL](https://www.mysql.com/downloads/).
 
-Por fim, crie 2 variáveis de ambiente chamadas "USERNAME_DB" e "PASSWORD_DB". Os valores das variáveis devem ser respectivamente o username e senha de um usuário do MySQL (pode ser user root).
+A API tem os valores de usuario e senha do banco respectivamente "root" e "12345678". Caso o usuario do banco seja diferente, crie variáveis de ambiente: "USERNAME_DB" e "PASSWORD_DB". Os valores das variáveis devem ser respectivamente o username e senha de um usuário do MySQL (pode ser user root).
 
 #### 🎲 Rodando a API
 
@@ -75,19 +75,13 @@ Por fim, crie 2 variáveis de ambiente chamadas "USERNAME_DB" e "PASSWORD_DB". O
 # Clone este repositório
 $ git clone git@github.com:ViniPorto/lolchamps.git
 
-# Acesse a pasta do projeto no terminal/cmd
-$ cd lolchamps
-
-# Realize o build da API:
-$ mvn clean package
-
-# Acesse a pasta Target que contém o executável da aplicação:
-$ cd Target
+# Acesse a pasta do projeto que contém o build da aplicação no terminal/cmd
+$ cd lolchamps/target
 
 # Execute o arquivo através do comando:
 $ java -jar lolchamps-0.0.1-SNAPSHOT.jar
 
-# O servidor inciará na porta:8080 - acesse http://localhost:8080 
+# O servidor inciará na porta:8080 - acesse http://localhost:8080/champ
 
 ```
 <p align="center">
@@ -111,7 +105,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 -   **[Spring Security](https://spring.io/projects/spring-security)**
 -   **[auth0 Java JWT](https://github.com/auth0/java-jwt)**
 
-> Veja o arquivo  [pom.xml](https://github.com/ViniPorto/lolchamps/blob/main/lolchamps/pom.xml)
+> Veja o arquivo  [pom.xml](https://github.com/ViniPorto/lolchamps/blob/master/pom.xml)
 
 #### [](https://github.com/tgmarinho/Ecoleta#utilit%C3%A1rios)**Utilitários**
 
