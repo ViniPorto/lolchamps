@@ -85,7 +85,7 @@ $ java -jar lolchamps-0.0.1-SNAPSHOT.jar
 
 ```
 <p align="center">
-  <a href="https://github.com/viniporto/lolchamps/TestesInsomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  <a href="https://github.com/ViniPorto/lolchamps/blob/master/TestesInsomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
 </p>
 
 ---
