@@ -17,7 +17,7 @@
   
 </p>
 <h1 align="center">
-    <img alt="Lolchamps Logo" title="#lolchamps" src="." />
+    Lol Champs
 </h1>
 
 <h4 align="center"> 
