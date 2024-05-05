@@ -26,15 +26,15 @@ public class ChampService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public Page<DadosListagemChamp> listarChamps(Pageable paginacao, String name, List<Long> roles) {
+    public Page<DadosListagemChamp> listarChamps(Pageable paginacao, String name, List<Long> roles, Boolean sale) {
         if(name == null && roles == null){
-            return champRepository.findAllByAtivoTrue(paginacao).map(DadosListagemChamp::new);
+            return champRepository.findAllByAtivoTrue(paginacao, sale).map(DadosListagemChamp::new);
         }else if(name != null && roles == null){
-            return champRepository.findAllFiltroPorName(paginacao, name).map(DadosListagemChamp::new);
+            return champRepository.findAllFiltroPorName(paginacao, name, sale).map(DadosListagemChamp::new);
         }else if(name == null && roles != null){
-            return champRepository.findAllFiltroPorRole(paginacao, roles).map(DadosListagemChamp::new);
+            return champRepository.findAllFiltroPorRole(paginacao, roles, sale).map(DadosListagemChamp::new);
         }
-        return champRepository.findAllFiltroPorRoleEName(paginacao, name, roles).map(DadosListagemChamp::new);
+        return champRepository.findAllFiltroPorRoleEName(paginacao, name, roles, sale).map(DadosListagemChamp::new);
     }
 
     public Champ detalharChamp(Long id) {

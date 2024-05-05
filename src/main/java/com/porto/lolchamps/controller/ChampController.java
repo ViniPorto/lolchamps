@@ -35,9 +35,10 @@ public class ChampController {
     @GetMapping
     public ResponseEntity<Page<DadosListagemChamp>> listarChamps(Pageable paginacao,
                                                                 @RequestParam(required = false) String name,
-                                                                @RequestParam(required = false) List<Long> roles){
-        var champs = champService.listarChamps(paginacao, name, roles);
-        System.out.println("teste");
+                                                                @RequestParam(required = false) List<Long> roles,
+                                                                @RequestParam(required = false) Boolean sale){
+        var champs = champService.listarChamps(paginacao, name, roles, sale);
+        System.out.println(champs.getContent());
         return ResponseEntity.ok(champs);
     }
 
