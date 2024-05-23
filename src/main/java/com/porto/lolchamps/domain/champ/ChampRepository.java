@@ -25,7 +25,7 @@ public interface ChampRepository extends JpaRepository<Champ, Long> {
             """)
     Page<Champ> findAllFiltroPorName(Pageable paginacao, @Param("name") String name, @Param("sale") Boolean sale);
 
-    @Query(value =  """
+    @Query("""
             SELECT c FROM Champ c
             WHERE c.ativo = true
             AND (
@@ -37,8 +37,8 @@ public interface ChampRepository extends JpaRepository<Champ, Long> {
             """)
 	Page<Champ> findAllFiltroPorRole(Pageable paginacao, @Param("roles") List<Long> roles, @Param("sale") Boolean sale, @Param("rolesSize") int size);
 
-    @Query(value = """
-            SELECT c FROM champ c
+    @Query("""
+            SELECT c FROM Champ c
             WHERE c.ativo = true
             AND c.name LIKE %:name%
             AND (
