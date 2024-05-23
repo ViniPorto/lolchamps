@@ -25,23 +25,29 @@ public interface ChampRepository extends JpaRepository<Champ, Long> {
             """)
     Page<Champ> findAllFiltroPorName(Pageable paginacao, @Param("name") String name, @Param("sale") Boolean sale);
 
-    @Query("""
-            SELECT c FROM Champ c
-            INNER JOIN Role r ON r.id = c.role.id
+    @Query(nativeQuery = true, value =  """
+            SELECT * FROM champ c
             WHERE c.ativo = true
-            AND r.id IN (:roles)
+            AND (
+                SELECT COUNT(cr.role_id) FROM champ_role cr
+                WHERE cr.champ_id = c.id
+                AND cr.role_id IN :roles
+            ) = :rolesSize
             AND (:sale is null OR c.sale = :sale)
             """)
-	Page<Champ> findAllFiltroPorRole(Pageable paginacao, @Param("roles") List<Long> roles, @Param("sale") Boolean sale);
+	Page<Champ> findAllFiltroPorRole(Pageable paginacao, @Param("roles") List<Long> roles, @Param("sale") Boolean sale, @Param("rolesSize") int size);
 
-    @Query("""
-            SELECT c FROM Champ c
-            INNER JOIN Role r ON r.id = c.role.id
+    @Query(nativeQuery = true, value = """
+            SELECT * FROM champ c
             WHERE c.ativo = true
             AND c.name LIKE %:name%
-            AND r.id IN (:roles)
+            AND (
+                SELECT COUNT(cr.role_id) FROM champ_role cr
+                WHERE cr.champ_id = c.id
+                AND cr.role_id IN :roles
+            ) = :rolesSize
             AND (:sale is null OR c.sale = :sale)
             """)
-    Page<Champ> findAllFiltroPorRoleEName(Pageable paginacao, @Param("name") String name, @Param("roles") List<Long> roles, @Param("sale") Boolean sale);
+    Page<Champ> findAllFiltroPorRoleEName(Pageable paginacao, @Param("name") String name, @Param("roles") List<Long> roles, @Param("sale") Boolean sale, @Param("rolesSize") int size);
     
 }

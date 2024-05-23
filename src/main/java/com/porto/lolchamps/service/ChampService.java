@@ -12,6 +12,7 @@ import com.porto.lolchamps.domain.champ.ChampRepository;
 import com.porto.lolchamps.domain.champ.DadosCadastroChamp;
 import com.porto.lolchamps.domain.champ.DadosEdicaoChamp;
 import com.porto.lolchamps.domain.champ.DadosListagemChamp;
+import com.porto.lolchamps.domain.champrole.ChampRole;
 import com.porto.lolchamps.domain.role.RoleRepository;
 import com.porto.lolchamps.infra.exception.exceptions.ChampInativoException;
 
@@ -32,9 +33,9 @@ public class ChampService {
         }else if(name != null && roles == null){
             return champRepository.findAllFiltroPorName(paginacao, name, sale).map(DadosListagemChamp::new);
         }else if(name == null && roles != null){
-            return champRepository.findAllFiltroPorRole(paginacao, roles, sale).map(DadosListagemChamp::new);
+            return champRepository.findAllFiltroPorRole(paginacao, roles, sale, roles.size()).map(DadosListagemChamp::new);
         }
-        return champRepository.findAllFiltroPorRoleEName(paginacao, name, roles, sale).map(DadosListagemChamp::new);
+        return champRepository.findAllFiltroPorRoleEName(paginacao, name, roles, sale, roles.size()).map(DadosListagemChamp::new);
     }
 
     public Champ detalharChamp(Long id) {
@@ -44,8 +45,13 @@ public class ChampService {
     }
 
     public Champ cadastrarChamp(@Valid DadosCadastroChamp dadosCadastroChamp) {
-        var role = roleRepository.getReferenceById(dadosCadastroChamp.idRole());
-        var champ = new Champ(dadosCadastroChamp, role);
+        var roles = roleRepository.listarRolesPorIds(dadosCadastroChamp.idRoles());
+        var champ = new Champ(dadosCadastroChamp);
+
+        champRepository.save(champ);
+
+        List<ChampRole> champRoles = roles.stream().map(role -> new ChampRole(role, champ)).toList();
+        champ.setChampRoles(champRoles);
 
         return champRepository.save(champ);
     }

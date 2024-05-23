@@ -38,7 +38,6 @@ public class ChampController {
                                                                 @RequestParam(required = false) List<Long> roles,
                                                                 @RequestParam(required = false) Boolean sale){
         var champs = champService.listarChamps(paginacao, name, roles, sale);
-        System.out.println(champs.getContent());
         return ResponseEntity.ok(champs);
     }
 

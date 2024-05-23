@@ -1,17 +1,16 @@
 package com.porto.lolchamps.domain.champ;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import com.porto.lolchamps.domain.role.Role;
+import com.porto.lolchamps.domain.champrole.ChampRole;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -33,9 +32,8 @@ public class Champ {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id")
-    private Role role;
+    @OneToMany(mappedBy = "champ")
+    private List<ChampRole> champRoles;
     @Column(name = "rpprice")
     private int rpPrice;
     @Column(name = "eaprice")
@@ -47,9 +45,9 @@ public class Champ {
     private Boolean ativo;
     private Integer percent;
 
-    public Champ(DadosCadastroChamp dadosCadastroChamp, Role role){
+    public Champ(DadosCadastroChamp dadosCadastroChamp){
         this.name = dadosCadastroChamp.name();
-        this.role = role;
+        this.champRoles = null;
         this.rpPrice = dadosCadastroChamp.rpPrice();
         this.eaPrice = dadosCadastroChamp.eaPrice();
         this.releaseDate = dadosCadastroChamp.releaseDate();

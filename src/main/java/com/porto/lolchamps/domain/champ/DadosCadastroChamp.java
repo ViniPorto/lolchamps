@@ -1,6 +1,7 @@
 package com.porto.lolchamps.domain.champ;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -12,7 +13,7 @@ public record DadosCadastroChamp(
     @NotBlank
     String name,
     @NotNull
-    Long idRole,
+    List<Long> idRoles,
     @NotNull
     Integer rpPrice,
     @NotNull
